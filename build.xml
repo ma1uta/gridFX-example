@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gridfx" default="run">
+
+
+    <dirname property="basedir" file="${ant.file}" />
+
+    <property name="output.dir" value="build" />
+
+    <patternset id="resources">
+        <include name="**/?*.fxml" />
+    </patternset>
+
+    <path id="src">
+        <dirset dir="${basedir}">
+            <include name="src" />
+        </dirset>
+    </path>
+
+    <target name="run" depends="compile">
+        <java classname="sample.Main" classpath="${output.dir}" fork="true" />
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${output.dir}" />
+
+        <javac destdir="${output.dir}" debug="on" fork="true">
+            <compilerarg line="-encoding UTF-8 -source 8" />
+            <src refid="src" />
+        </javac>
+
+        <copy todir="${output.dir}">
+            <fileset dir="${basedir}/src">
+                <patternset refid="resources" />
+                <type type="file" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="clean">
+        <delete dir="${output.dir}" failonerror="false" />
+    </target>
+
+</project>

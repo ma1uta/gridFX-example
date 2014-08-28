@@ -27,7 +27,7 @@ public class GridPaneController {
 
     public void removeRow(ActionEvent event) {
         ObservableList<Node> children = gridPane.getChildren();
-        if (children.size() > 1) {
+        if (children.size() > 0) {
             children.remove(children.size() - 1);
         }
     }
